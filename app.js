@@ -6,6 +6,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var helmet = require('helmet');
 
+// setup dotenv for local dev
+require('dotenv').config();
+
+// setup redis
+var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
+
+// user defined stuff
 var index = require('./routes/index');
 var users = require('./routes/users');
 
@@ -15,7 +23,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-// uncomment after placing your favicon in /public
+/* setup middleware to use for the app */
 app.use(favicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 app.use(helmet());
 app.use(logger('dev'));
@@ -23,6 +31,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  store: new RedisStore({
+    url: process.env.REDIS_URL
+  }),
+  secret: process.env.REDISSECRET,
+  resave: false,
+  saveUninitialized: false
+}));
 
 app.use('/', index);
 app.use('/users', users);

@@ -6,11 +6,27 @@ var auth = require('./auth');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' });
+  // set a redis page counter
+  req.session.pageCounter++;
+  console.log('hit the root route');
+  res.render('index', {
+    title: 'oAuth Demo',
+    pageCount: (req.session.pageCounter ? req.session.pageCounter : 'not set'),
+    userId: (req.session.authInfo ? req.session.authInfo.userId : 'not set'),
+    access_token: (req.session.authInfo ? req.session.authInfo.accessToken : 'not set'),
+    loginCount: req.session.loginCounter,
+    sessionId: req.session.id
+  });
 });
 
 // adding the routes for the auth transactions
 router.get('/login', auth.login);
-router.get('/callback', auth.callback);
+router.get('/salesforce/auth', auth.callback, auth.rootRedirect);
+
+// logout route
+router.get('/logout', function logout (req, res, next) {
+  req.session.destroy();
+  res.redirect('/');
+})
 
 module.exports = router;

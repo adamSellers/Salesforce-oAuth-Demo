@@ -3,3 +3,12 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  p This is page count #{pageCount}
+  p User Id: #{userId}
+  p Access Token: #{access_token}
+  p Login Counts: #{loginCount}
+  p Session Id: #{sessionId}
+  a(href='/logout') Logout | 
+  a(href='/login') Login
+  h3 Check out the users
+  a(href='/users') Users

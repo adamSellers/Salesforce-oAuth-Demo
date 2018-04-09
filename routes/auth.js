@@ -1,4 +1,3 @@
-// const express = require('express');
 var request = require('request');
 
 var clientId = process.env.CLIENTID;
@@ -31,15 +30,31 @@ function callback (req, res, next) {
     if (err) {
       return next(err);
     }
-    // work with the response data
-    console.log('response is: ' + JSON.stringify(res));
+    // set session data in redis
+    req.session.loginCounter++;
+    req.session.authInfo = {
+      accessToken: res.body.access_token,
+      refreshToken: res.body.refresh_token,
+      userId: res.body.id,
+      signature: res.body.signature,
+      instanceUrl: res.body.instance_url,
+      issuedAt: res.body.issued_at,
+      userIsAuthenticated: true
+    }
+    req.session.save();
+    console.log('session data saved as: ' + JSON.stringify(req.session.authInfo));
+    next();
   });
+};
 
-  res.redirect('/'); // implement something else here!
+// function for redirecting
+function rootRedirect (req, res, next) {
+  console.log('in the redirect function');
+  res.redirect('/');
 }
-
 // Export the functions to be used in the router.
 module.exports = {
   login: login,
-  callback: callback
+  callback: callback,
+  rootRedirect: rootRedirect
 }
