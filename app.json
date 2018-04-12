@@ -2,7 +2,10 @@
     "name": "Salesforce oAuth Demo Tool",
     "description": "This app showcases an oAuth flow using Salesforce as an external IDP",
     "addons": [
-        "heroku-redis:hobby-dev"
+        {
+            "plan": "heroku-redis:hobby-dev" 
+        }
+       
     ],
     "env": {
         "CLIENTID": {
