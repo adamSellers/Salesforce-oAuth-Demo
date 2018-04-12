@@ -3,19 +3,5 @@
     "description": "This app showcases an oAuth flow using Salesforce as an external IDP",
     "addons": [
         "heroku-redis:hobby-dev"
-    ],
-    "env": {
-        "CLIENTID": {
-            "description": "Your client ID from the Salesforce connected app",
-            "value": "Enter a value here"
-        },
-        "CLIENTSECRET": {
-            "description":  "The Salesforce connected app client secret",
-            "value": "Enter a value here"
-        },
-        "CALLBACKURL": {
-            "description": "The callback url that you will need to enter into the SF Org",
-            "value": "https://YOURAPPNAME/salesforce/auth"
-        }
-    }
+    ]
 }
