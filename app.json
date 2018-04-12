@@ -5,10 +5,6 @@
         "heroku-redis:hobby-dev"
     ],
     "env": {
-        "REDISSECRET": {
-            "description": "A super secret key for use with Redis",
-            "generator": "secret"
-        },
         "CLIENTID": {
             "description": "Your client ID from the Salesforce connected app",
             "value": "Enter a value here"
@@ -19,7 +15,7 @@
         },
         "CALLBACKURL": {
             "description": "The callback url that you will need to enter into the SF Org",
-            "generator": "https://YOURAPPNAME/salesforce/auth"
+            "value": "https://YOURAPPNAME/salesforce/auth"
         }
     }
 }
