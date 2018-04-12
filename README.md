@@ -27,7 +27,9 @@ CALLBACKURL=http://localhost:3001/salesforce/auth
 REDISSECRET={A super secret string}
 REDIS_URL={your redis URL}
 ````
-once all that is done, you are good to go!
+remember, head back to your connected app and update that Callback URL!
+
+Once all that is done, you are good to go!
 ````
 npm start
 ````
