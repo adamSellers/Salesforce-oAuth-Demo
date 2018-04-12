@@ -4,3 +4,31 @@ This is a demo application that showcases an implementation of oAuth from Salesf
 ## Installation
 Firstly, setup your Salesforce Org with a [connected app](https://trailhead.salesforce.com/en/projects/workshop-electric-imp/steps/connected-app-setup). Remember! You will have to come back here and update your callback URL once you get it. 
 
+### Building the App locally
+Before you start, make sure you've got Redis running locally. (If not, it's okay - [we can wait](https://redis.io/topics/quickstart))
+
+Firstly, clone (or fork and clone) the App.
+````
+git clone https://github.com/adamSellers/Salesforce-oAuth-Demo.git
+````
+Change directories and install stuff
+````
+cd Salesforce-oAuth-Demo && npm install
+````
+Create the .env file
+````
+touch .env
+````
+Then add the following config vars
+````
+CLIENTID={your salesforce client id}
+CLIENTSECRET={your salesforce client secret}
+CALLBACKURL=http://localhost:3001/salesforce/auth
+REDISSECRET={A super secret string}
+REDIS_URL={your redis URL}
+````
+once all that is done, you are good to go!
+````
+npm start
+````
+Then navigate to [http://localhost:3001](http://localhost:3001) to get started.
