@@ -50,7 +50,7 @@ git add .
 git commit -m "slinky heroku"
 git push heroku master
 ````
-Add you config vars
+Add your config vars
 ````
 heroku config:set CLIENTID={your client id} CLIENTSECRET={your client secret} CALLBACKURL={https://{YOURAPPNAME}.herokuapp.com/salesforce/auth}
 ````
