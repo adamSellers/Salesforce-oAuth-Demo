@@ -21,12 +21,9 @@ router.get('/', function (req, res, next) {
 
 // adding the routes for the auth transactions
 router.get('/login', auth.login);
-router.get('/salesforce/auth', auth.callback, auth.rootRedirect);
+router.get('/salesforce/auth', auth.callback);
 
 // logout route
-router.get('/logout', function logout (req, res, next) {
-  req.session.destroy();
-  res.redirect('/');
-})
+router.get('/logout', auth.logout);
 
 module.exports = router;

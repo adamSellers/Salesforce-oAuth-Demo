@@ -1,9 +1,26 @@
 var express = require('express');
 var router = express.Router();
+var request = require('request');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
+  // options for GET request
+  let options = {
+    url: req.session.authInfo.userId,
+    headers: {
+      'Authorization': `Bearer ${req.session.authInfo.accessToken}`
+    }
+  };
+
+  function getCallback (err, data) {
+    if (err) {
+      return console.log(err);
+    }
+    console.log('the data is: ' + JSON.stringify(data));
+    res.json(data);
+  }
+
+  request(options, getCallback);
 });
 
 module.exports = router;

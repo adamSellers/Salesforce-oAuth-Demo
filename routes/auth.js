@@ -25,36 +25,54 @@ function callback (req, res, next) {
       redirect_uri: callbackUrl
     },
     json: true
-  }, function (err, res, body) {
+  }, function (err, data) {
     // handle errors if present
     if (err) {
       return next(err);
     }
+
     // set session data in redis
     req.session.loginCounter++;
     req.session.authInfo = {
-      accessToken: res.body.access_token,
-      refreshToken: res.body.refresh_token,
-      userId: res.body.id,
-      signature: res.body.signature,
-      instanceUrl: res.body.instance_url,
-      issuedAt: res.body.issued_at,
+      accessToken: data.body.access_token,
+      refreshToken: data.body.refresh_token,
+      userId: data.body.id,
+      signature: data.body.signature,
+      instanceUrl: data.body.instance_url,
+      issuedAt: data.body.issued_at,
       userIsAuthenticated: true
     }
     req.session.save();
     console.log('session data saved as: ' + JSON.stringify(req.session.authInfo));
-    next();
+    // send user back to homepage to view stats
+    res.redirect('/');
   });
 };
 
-// function for redirecting
-function rootRedirect (req, res, next) {
-  console.log('in the redirect function');
-  res.redirect('/');
+// logout function that revokes the oAuth token from Salesforce
+function logout (req, res, next) {
+  // first define the URL for the token revoke service
+  let revokeUrl = 'https://login.salesforce.com/services/oauth2/revoke';
+
+  // POST request with data
+  request.post(revokeUrl, {
+    form: {
+      token: req.session.authInfo.accessToken
+    }
+  }, function (err, data) {
+    if (err) {
+      return console.log(err);
+    }
+    console.log('everything is invalidated: ' + JSON.stringify(data));
+    // destroy the session and redirect to root
+    req.session.destroy();
+    res.redirect('/');
+  });
 }
+
 // Export the functions to be used in the router.
 module.exports = {
   login: login,
   callback: callback,
-  rootRedirect: rootRedirect
+  logout: logout
 }
