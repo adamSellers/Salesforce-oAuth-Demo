@@ -70,9 +70,23 @@ function logout (req, res, next) {
   });
 }
 
+// function to check if logged in
+function isLoggedIn (err, req, res, next) {
+  if (err) {
+    return next(err);
+  }
+  if (!req.session.authInfo.userIsAuthenticated) {
+    console.log('user must login first!');
+    res.redirect('/');
+  } else {
+    next();
+  }
+}
+
 // Export the functions to be used in the router.
 module.exports = {
   login: login,
   callback: callback,
-  logout: logout
+  logout: logout,
+  isLoggedIn: isLoggedIn
 }

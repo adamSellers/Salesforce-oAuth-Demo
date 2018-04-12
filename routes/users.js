@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
+var auth = require('./auth');
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
+router.get('/', auth.isLoggedIn, function (req, res, next) {
   // options for GET request
   let options = {
     url: req.session.authInfo.userId,
