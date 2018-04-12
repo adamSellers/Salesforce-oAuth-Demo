@@ -34,3 +34,10 @@ Once all that is done, you are good to go!
 npm start
 ````
 Then navigate to [http://localhost:3001](http://localhost:3001) to get started.
+
+### Build in Heroku (recommended)
+Firstly, clone (or fork and clone) the App.
+````
+git clone https://github.com/adamSellers/Salesforce-oAuth-Demo.git
+````
+
