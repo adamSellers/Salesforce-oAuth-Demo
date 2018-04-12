@@ -40,4 +40,21 @@ Firstly, clone (or fork and clone) the App.
 ````
 git clone https://github.com/adamSellers/Salesforce-oAuth-Demo.git
 ````
-
+Create your app
+````
+heroku apps:create
+````
+git push the world!
+````
+git add .
+git commit -m "slinky heroku"
+git push heroku master
+````
+Add you config vars
+````
+heroku config:set CLIENTID={your client id} CLIENTSECRET={your client secret} CALLBACKURL={https://{YOURAPPNAME}.herokuapp.com/salesforce/auth}
+````
+Then you're good to go
+````
+heroku open
+````
