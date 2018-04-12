@@ -50,6 +50,11 @@ git add .
 git commit -m "slinky heroku"
 git push heroku master
 ````
+Provision the Redis addon
+````
+heroku addons:create heroku-redis:hobby-dev
+````
+
 Add your config vars
 ````
 heroku config:set CLIENTID={your client id} CLIENTSECRET={your client secret} CALLBACKURL={https://{YOURAPPNAME}.herokuapp.com/salesforce/auth}
