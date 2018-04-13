@@ -35,31 +35,13 @@ npm start
 ````
 Then navigate to [http://localhost:3001](http://localhost:3001) to get started.
 
-### Build in Heroku (recommended)
-Firstly, clone (or fork and clone) the App.
-````
-git clone https://github.com/adamSellers/Salesforce-oAuth-Demo.git
-````
-Create your app
-````
-heroku apps:create
-````
-git push the world!
-````
-git add .
-git commit -m "slinky heroku"
-git push heroku master
-````
-Provision the Redis addon
-````
-heroku addons:create heroku-redis:hobby-dev
-````
+### Or you can do it much easier in Heroku.. 
+[![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://github.com/adamSellers/Salesforce-oAuth-Demo.git) 
 
-Add your config vars
-````
-heroku config:set CLIENTID={your client id} CLIENTSECRET={your client secret} CALLBACKURL={https://{YOURAPPNAME}.herokuapp.com/salesforce/auth}
-````
-Then you're good to go
-````
-heroku open
-````
+Once you have your app, be sure to set the following Config Vars:
+
+1. CLIENTDID: This is your Salesforce connected app client ID. 
+2. CLIENTSECRET: This is your Salesforce connected app secret.
+3. CALLBACKURL: this will be https://{YOURAPPNAME}.herokuapp.com/salesforce/auth
+
+Then let the hapiness commence!
