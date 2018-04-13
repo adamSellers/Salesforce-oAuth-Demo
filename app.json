@@ -3,8 +3,7 @@
     "description": "This app showcases an oAuth flow using Salesforce as an external IDP",
     "addons": [
         {
-            "plan":"heroku-redis",
-            "as": "REDIS"
+            "plan":"heroku-redis"
         }
     ]
 }
