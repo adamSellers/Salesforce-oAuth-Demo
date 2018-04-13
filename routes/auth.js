@@ -52,12 +52,16 @@ function callback (req, res, next) {
 // logout function that revokes the oAuth token from Salesforce
 function logout (req, res, next) {
   // first define the URL for the token revoke service
-  let revokeUrl = 'https://login.salesforce.com/services/oauth2/revoke';
+  let instanceUrl = req.session.authInfo.instanceUrl;
+  let revokeUrl = `${instanceUrl}/services/oauth2/revoke`;
 
   // POST request with data
   request.post(revokeUrl, {
     form: {
       token: req.session.authInfo.accessToken
+    },
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
     }
   }, function (err, data) {
     if (err) {
@@ -75,7 +79,7 @@ function isLoggedIn (err, req, res, next) {
   if (err) {
     return next(err);
   }
-  if (!req.session.authInfo.userIsAuthenticated) {
+  if (req.session.authInfo.userIsAuthenticated) {
     console.log('user must login first!');
     res.redirect('/');
   } else {
