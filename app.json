@@ -1,6 +1,24 @@
 {
     "name": "Salesforce oAuth Demo Tool",
     "description": "This app showcases an oAuth flow using Salesforce as an external IDP",
+    "env": {
+        "REDISSECRET": {
+            "description": "A super secret key for redis",
+            "generator": "value"
+        },
+        "CLIENTID": {
+            "description": "Your Salesforce connected app Client ID",
+            "value": "Enter a value"
+        },
+        "CLIENTSECRET": {
+            "description": "Your Salesforce connected app Client secret",
+            "value": "Enter a value"
+        },
+        "CALLBACKURL": {
+            "description": "Your Salesforce connected app Client ID",
+            "value": "https://{YOURAPPNAMEHERE}.herokuapp.com/salesforce/auth"
+        }
+    },
     "addons": [
         {
             "plan": "heroku-redis"
