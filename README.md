@@ -36,7 +36,7 @@ npm start
 Then navigate to [http://localhost:3001](http://localhost:3001) to get started.
 
 ### Or you can do it much easier in Heroku.. 
-[![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://github.com/adamSellers/Salesforce-oAuth-Demo.git) 
+[![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/adamSellers/Salesforce-oAuth-Demo.git) 
 
 Once you have your app, be sure to set the following Config Vars:
 
