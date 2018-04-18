@@ -17,6 +17,10 @@
         "CALLBACKURL": {
             "description": "Your Salesforce connected app Client ID",
             "value": "https://{YOURAPPNAMEHERE}.herokuapp.com/salesforce/auth"
+        },
+        "SALESFORCE_ENDPOINT": {
+            "description": "You may want to use a Community as and end point, so you can use External Identities",
+            "value": "https://login.salesforce.com"
         }
     },
     "addons": [
