@@ -15,7 +15,7 @@
             "value": "Enter a value"
         },
         "CALLBACKURL": {
-            "description": "Your Salesforce connected app Client ID",
+            "description": "Your Salesforce connected app Callback URL",
             "value": "https://{YOURAPPNAMEHERE}.herokuapp.com/salesforce/auth"
         },
         "SALESFORCE_ENDPOINT": {
