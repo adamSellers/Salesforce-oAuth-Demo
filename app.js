@@ -33,7 +33,9 @@ var bodyParser = require('body-parser');
 var helmet = require('helmet');
 
 // setup dotenv for local dev
-require('dotenv').config();
+if (NODE_ENV === 'PRODUCTION') {
+    require('dotenv').config();
+}
 
 // setup redis
 var session = require('express-session');
