@@ -33,7 +33,7 @@ var bodyParser = require('body-parser');
 var helmet = require('helmet');
 
 // setup dotenv for local dev
-if (process.env.NODE_ENV === 'production') {
+if (!process.env.NODE_ENV) {
     require('dotenv').config();
 }
 
