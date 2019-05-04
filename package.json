@@ -1,5 +1,5 @@
 {
-  "name": "Salesforce-oAuth-Demo",
+  "name": "Salesforce_oAuth_Demo",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -15,7 +15,7 @@
     "express-session": "^1.15.6",
     "helmet": "^3.12.0",
     "morgan": "^1.9.1",
-    "pug": "2.0.0-beta11",
+    "pug": "^2.0.3",
     "redis": "^2.8.0",
     "request": "^2.88.0",
     "serve-favicon": "~2.4.5"
