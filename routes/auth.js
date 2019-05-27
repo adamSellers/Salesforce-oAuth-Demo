@@ -5,13 +5,13 @@
 // modification, are permitted provided that the following conditions are met:
 //
 // - Redistributions of source code must retain the above copyright notice,
-//   this list of conditions and the following disclaimer. 
-// - Redistributions in binary form must reproduce the above copyright notice, 
+//   this list of conditions and the following disclaimer.
+// - Redistributions in binary form must reproduce the above copyright notice,
 //   this list of conditions and the following disclaimer in the documentation
 //   and/or other materials provided with the distribution.
 // - Neither the name of the salesforce.com nor the names of its contributors
 //   may be used to endorse or promote products derived from this software
-//   without specific prior written permission. 
+//   without specific prior written permission.
 //
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 // AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -30,19 +30,19 @@ var clientId = process.env.CLIENTID;
 var clientSecret = process.env.CLIENTSECRET;
 var callbackUrl = process.env.CALLBACKURL;
 
-var salesforce_endpoint = process.env.SALESFORCE_ENDPOINT;
+var salesforceEndpoint = process.env.SALESFORCE_ENDPOINT;
 
-function login(req, res, next) {
+function login (req, res, next) {
     // we simply just redirect the user to the Salesforce login service.
-    res.redirect(`${salesforce_endpoint}/services/oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${callbackUrl}&display=popup`);
+    res.redirect(`${salesforceEndpoint}/services/oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${callbackUrl}&display=popup`);
 };
 
-function callback(req, res, next) {
+function callback (req, res, next) {
     // first we harvest the code variable
     let authCode = req.query.code;
 
     // the URL that we are going to post the auth code to
-    let tokenUrl = `${salesforce_endpoint}/services/oauth2/token`;
+    let tokenUrl = `${salesforceEndpoint}/services/oauth2/token`;
     // post to token url to get access token using the request library
     request.post(
         tokenUrl,
@@ -80,9 +80,9 @@ function callback(req, res, next) {
 };
 
 // logout function that revokes the oAuth token from Salesforce
-function logout(req, res, next) {
+function logout (req, res, next) {
     // first define the URL for the token revoke service
-    let revokeUrl = `${salesforce_endpoint}/services/oauth2/revoke`;
+    let revokeUrl = `${salesforceEndpoint}/services/oauth2/revoke`;
 
     // POST request with data
     request.post(revokeUrl, {
@@ -101,7 +101,7 @@ function logout(req, res, next) {
 }
 
 // function to check if logged in
-function isLoggedIn(err, req, res, next) {
+function isLoggedIn (err, req, res, next) {
     if (err) {
         return next(err);
     }
