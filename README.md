@@ -44,5 +44,6 @@ Once you have your app, be sure to set the following Config Vars:
 1. CLIENTDID: This is your Salesforce connected app client ID. 
 2. CLIENTSECRET: This is your Salesforce connected app secret.
 3. CALLBACKURL: this will be https://{YOURAPPNAME}.herokuapp.com/salesforce/auth
+4. SALESFORCE_ENDPOINT: this is your login endpoint for SF (eg: https://login.salesforce.com or a community URL)
 
 Then let the hapiness commence!
