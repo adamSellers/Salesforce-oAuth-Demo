@@ -26,6 +26,7 @@ CLIENTSECRET={your salesforce client secret}
 CALLBACKURL=http://localhost:3001/salesforce/auth
 REDISSECRET={A super secret string}
 REDIS_URL={your redis URL}
+SALESFORCE_ENDPOINT={your salesforce login endpoint, ie https://login.salesforce.com or a community URL}
 ````
 remember, head back to your connected app and update that Callback URL!
 
