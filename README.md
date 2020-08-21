@@ -1,16 +1,21 @@
 # Node.js oAuth Demo App - Salesforce as IDP
+
 This is a demo application that showcases an implementation of oAuth from Salesforce in Node.js. 
 
 ## Installation
-Firstly, setup your Salesforce Org with a [connected app](https://trailhead.salesforce.com/en/projects/workshop-electric-imp/steps/connected-app-setup). Remember! You will have to come back here and update your callback URL once you get it. 
+Firstly, setup your Salesforce Org with a [connected app](https://trailhead.salesforce.com/en/projects/workshop-electric-imp/steps/connected-app-setup). Remember! You will have to come back here and update your callback URL once you get it.
 
 ### Building the App locally
+
 Before you start, make sure you've got Redis running locally. (If not, it's okay - [we can wait](https://redis.io/topics/quickstart))
 
 Firstly, clone (or fork and clone) the App.
+
 ````
+
 git clone https://github.com/adamSellers/Salesforce-oAuth-Demo.git
 ````
+
 Change directories and install stuff
 ````
 cd Salesforce-oAuth-Demo && npm install
