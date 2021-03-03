@@ -15,7 +15,7 @@
     "express-session": "^1.15.6",
     "helmet": "^3.21.3",
     "morgan": "^1.9.1",
-    "pug": "^2.0.3",
+    "pug": "^3.0.1",
     "redis": "^2.8.0",
     "request": "^2.88.0",
     "serve-favicon": "~2.4.5"
