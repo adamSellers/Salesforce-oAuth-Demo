@@ -11,7 +11,7 @@
     "connect-redis": "^3.3.3",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-session": "^1.15.6",
     "helmet": "^3.21.3",
     "morgan": "^1.9.1",
