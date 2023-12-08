@@ -24,7 +24,7 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-var request = require('request');
+var request = require("request");
 
 var clientId = process.env.CLIENTID;
 var clientSecret = process.env.CLIENTSECRET;
@@ -32,14 +32,17 @@ var callbackUrl = process.env.CALLBACKURL;
 
 var salesforceEndpoint = process.env.SALESFORCE_ENDPOINT;
 
-function login (req, res, next) {
+function login(req, res, next) {
     // we simply just redirect the user to the Salesforce login service.
-    res.redirect(`${salesforceEndpoint}/services/oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${callbackUrl}&display=popup`);
-};
+    res.redirect(
+        `${salesforceEndpoint}/services/oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${callbackUrl}&display=popup`
+    );
+}
 
-function callback (req, res, next) {
+function callback(req, res, next) {
     // first we harvest the code variable
     let authCode = req.query.code;
+    console.log("auth code is: " + authCode);
 
     // the URL that we are going to post the auth code to
     let tokenUrl = `${salesforceEndpoint}/services/oauth2/token`;
@@ -49,12 +52,12 @@ function callback (req, res, next) {
         {
             form: {
                 code: authCode,
-                grant_type: 'authorization_code',
+                grant_type: "authorization_code",
                 client_id: clientId,
                 client_secret: clientSecret,
-                redirect_uri: callbackUrl
+                redirect_uri: callbackUrl,
             },
-            json: true
+            json: true,
         },
         function (err, data) {
             // handle errors if present
@@ -70,44 +73,51 @@ function callback (req, res, next) {
                 signature: data.body.signature,
                 instanceUrl: data.body.instance_url,
                 issuedAt: data.body.issued_at,
-                userIsAuthenticated: true
-            }
+                userIsAuthenticated: true,
+            };
             req.session.save();
-            console.log('session data saved as: ' + JSON.stringify(req.session.authInfo));
+            console.log(
+                "session data saved as: " + JSON.stringify(req.session.authInfo)
+            );
             // send user back to homepage to view stats
-            res.redirect('/');
-        });
-};
+            res.redirect("/");
+        }
+    );
+}
 
 // logout function that revokes the oAuth token from Salesforce
-function logout (req, res, next) {
+function logout(req, res, next) {
     // first define the URL for the token revoke service
     let revokeUrl = `${salesforceEndpoint}/services/oauth2/revoke`;
 
     // POST request with data
-    request.post(revokeUrl, {
-        form: {
-            token: req.session.authInfo.accessToken
+    request.post(
+        revokeUrl,
+        {
+            form: {
+                token: req.session.authInfo.accessToken,
+            },
+        },
+        function (err, data) {
+            if (err) {
+                return console.log(err);
+            }
+            console.log("everything is invalidated: " + JSON.stringify(data));
+            // destroy the session and redirect to root
+            req.session.destroy();
+            res.redirect("/");
         }
-    }, function (err, data) {
-        if (err) {
-            return console.log(err);
-        }
-        console.log('everything is invalidated: ' + JSON.stringify(data));
-        // destroy the session and redirect to root
-        req.session.destroy();
-        res.redirect('/');
-    });
+    );
 }
 
 // function to check if logged in
-function isLoggedIn (err, req, res, next) {
+function isLoggedIn(err, req, res, next) {
     if (err) {
         return next(err);
     }
     if (!req.session.authInfo.userIsAuthenticated) {
-        console.log('user must login first!');
-        res.redirect('/');
+        console.log("user must login first!");
+        res.redirect("/");
     } else {
         next();
     }
@@ -118,5 +128,5 @@ module.exports = {
     login: login,
     callback: callback,
     logout: logout,
-    isLoggedIn: isLoggedIn
-}
+    isLoggedIn: isLoggedIn,
+};
