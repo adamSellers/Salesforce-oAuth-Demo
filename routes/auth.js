@@ -61,6 +61,7 @@ function callback(req, res, next) {
         },
         function (err, data) {
             // handle errors if present
+            console.log("data is: " + JSON.stringify(data));
             if (err) {
                 return next(err);
             }
